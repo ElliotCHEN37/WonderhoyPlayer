@@ -1,0 +1,12 @@
+<RCC>
+  <qresource prefix="img">
+    <file>swap.png</file>
+    <file>wonderhoy.png</file>
+  </qresource>
+  <qresource prefix="ico">
+    <file>wonderhoy.ico</file>
+  </qresource>
+  <qresource prefix="snd">
+    <file>wonderhoy.wav</file>
+  </qresource>
+</RCC>
