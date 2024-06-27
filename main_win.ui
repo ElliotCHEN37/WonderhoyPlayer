@@ -16,7 +16,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Wonderhoy Player! - Version 1.0</string>
+   <string>Wonderhoy Player!</string>
   </property>
   <property name="locale">
    <locale language="English" country="UnitedStates"/>
@@ -74,7 +74,7 @@ You can change the playing mode by clicking the 'swap' button!</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="mode">
+   <widget class="QPushButton" name="mode_button">
     <property name="geometry">
      <rect>
       <x>500</x>

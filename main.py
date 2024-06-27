@@ -1,46 +1,48 @@
 import sys
 import io
 import threading
-from PyQt5 import QtWidgets
-from PyQt5.QtCore import QFile
-from PyQt5.QtWidgets import QApplication, QMainWindow
-from PyQt5.QtGui import QIcon, QPixmap
+import json
+import PyQt5 as qt
 from main_win import Ui_MainWindow
 from pydub import AudioSegment
 from pydub.playback import play
 
 
-class MainWindow(QMainWindow, Ui_MainWindow):
-    def __init__(self):
+class MainWindow(qt.QtWidgets.QMainWindow, Ui_MainWindow):
+    def __init__(self, config):
         super().__init__()
         self.setupUi(self)
 
-        self.setWindowIcon(QIcon(':/ico/wonderhoy.ico'))
+        self.setWindowIcon(qt.QtGui.QIcon(':/ico/wonderhoy.ico'))
 
-        wdh = QPixmap(':/img/wonderhoy.png').scaled(296, 256)
-        self.img.setIcon(QIcon(wdh))
+        wdh = qt.QtGui.QPixmap(':/img/wonderhoy.png').scaled(296, 256)
+        self.img.setIcon(qt.QtGui.QIcon(wdh))
         self.img.setIconSize(wdh.size())
         self.img.clicked.connect(self.play_audio)
 
-        swp = QPixmap(':/img/swap.png').scaled(100, 100)
-        self.mode.setIcon(QIcon(swp))
-        self.mode.clicked.connect(self.toggle_mode)
+        swp = qt.QtGui.QPixmap(':/img/swap.png').scaled(100, 100)
+        self.mode_button.setIcon(qt.QtGui.QIcon(swp))
+        self.mode_button.clicked.connect(self.toggle_mode)
 
         self.actionExit.triggered.connect(self.close)
         self.actionAbout.triggered.connect(self.show_about_dialog)
 
-        self.mode = 0
+        self.mode = int(config.get("mode", 0))
         self.audio_thread = None
         self.stop_audio_flag = threading.Event()
 
-    def toggle_mode(self):
+        if self.mode == 1:
+            self.setWindowTitle(self.tr("Wonderhoy Player! - Infinite mode"))
+        else:
+            self.setWindowTitle(self.tr("Wonderhoy Player! - Regular mode"))
 
+    def toggle_mode(self):
         if self.mode == 0:
             self.mode = 1
-            self.setWindowTitle("Wonderhoy Player! - Infinite mode")
+            self.setWindowTitle(self.tr("Wonderhoy Player! - Infinite mode"))
         else:
             self.mode = 0
-            self.setWindowTitle("Wonderhoy Player! - Regular mode")
+            self.setWindowTitle(self.tr("Wonderhoy Player! - Regular mode"))
 
         self.stop_audio()
 
@@ -52,8 +54,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.stop_audio_flag.clear()
 
         def play_wav():
-            audio_file = QFile(':/snd/wonderhoy.wav')
-            if audio_file.open(QFile.ReadOnly):
+            audio_file = qt.QtCore.QFile(':/snd/wonderhoy.wav')
+            if audio_file.open(qt.QtCore.QFile.ReadOnly):
                 audio_data = audio_file.readAll()
                 audio_file.close()
                 audio = AudioSegment.from_file(io.BytesIO(audio_data), format="wav")
@@ -71,13 +73,28 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.audio_thread.join()
 
     def show_about_dialog(self):
-        QtWidgets.QMessageBox.about(self, "About",
-                                    "Wonderhoy Player v1.0 by ElliotCHEN37\nLicensed under MIT License\n"
-                                    "Build time: 06/26/24")
+        qt.QtWidgets.QMessageBox.about(self, self.tr("About"),
+                                       self.tr("Wonderhoy Player v1.1 by ElliotCHEN37\nLicensed under MIT License\n"
+                                               "Build time: 24/06/27"))
+
+    def closeEvent(self, event):
+        self.stop_audio()
+        event.accept()
 
 
 if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = MainWindow()
+    with open('config.json', 'r') as f:
+        config = json.load(f)
+
+    app = qt.QtWidgets.QApplication(sys.argv)
+
+    trans_file = config.get("trans", "")
+    if trans_file:
+        trans = qt.QtCore.QTranslator()
+        trans.load(trans_file)
+        app.installTranslator(trans)
+
+    window = MainWindow(config)
     window.show()
+    window.retranslateUi(window)
     sys.exit(app.exec_())

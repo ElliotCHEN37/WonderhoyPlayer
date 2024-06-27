@@ -43,17 +43,17 @@ class Ui_MainWindow(object):
 "}")
         self.img.setText("")
         self.img.setObjectName("img")
-        self.mode = QtWidgets.QPushButton(self.centralwidget)
-        self.mode.setGeometry(QtCore.QRect(500, 210, 100, 100))
-        self.mode.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.mode.setStyleSheet("QPushButton\n"
+        self.mode_button = QtWidgets.QPushButton(self.centralwidget)
+        self.mode_button.setGeometry(QtCore.QRect(500, 210, 100, 100))
+        self.mode_button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.mode_button.setStyleSheet("QPushButton\n"
 "{\n"
 "    border: none;\n"
 "    background-color: transparent;\n"
 "}")
-        self.mode.setText("")
-        self.mode.setIconSize(QtCore.QSize(100, 100))
-        self.mode.setObjectName("mode")
+        self.mode_button.setText("")
+        self.mode_button.setIconSize(QtCore.QSize(100, 100))
+        self.mode_button.setObjectName("mode_button")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 640, 23))
@@ -77,7 +77,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Wonderhoy Player! - Version 1.0"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Wonderhoy Player!"))
         self.welcome_label.setText(_translate("MainWindow", "Wonderhoy! Click the sticker to play wonderhoy!\n"
 "You can change the playing mode by clicking the \'swap\' button!"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
