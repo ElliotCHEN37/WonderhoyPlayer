@@ -103,6 +103,62 @@ You can change the playing mode by clicking the 'swap' button!</string>
      </size>
     </property>
    </widget>
+   <widget class="QComboBox" name="spd">
+    <property name="geometry">
+     <rect>
+      <x>29</x>
+      <y>220</y>
+      <width>91</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="placeholderText">
+     <string>Speed</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>1x</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>2x</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>5x</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>10x</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>100x</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>1000x</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>190</y>
+      <width>101</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Playback speed</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -123,6 +179,7 @@ You can change the playing mode by clicking the 'swap' button!</string>
     <property name="title">
      <string>Help</string>
     </property>
+    <addaction name="actionCheck_for_update"/>
     <addaction name="actionAbout"/>
    </widget>
    <addaction name="menuFile"/>
@@ -136,6 +193,11 @@ You can change the playing mode by clicking the 'swap' button!</string>
   <action name="actionAbout">
    <property name="text">
     <string>About</string>
+   </property>
+  </action>
+  <action name="actionCheck_for_update">
+   <property name="text">
+    <string>Check for update</string>
    </property>
   </action>
  </widget>
