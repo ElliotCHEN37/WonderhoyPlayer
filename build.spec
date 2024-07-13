@@ -2,10 +2,10 @@
 
 
 a = Analysis(
-    ['C:\\Users\\Elliot CHEN\\Documents\\GitHub\\WonderhoyPlayer\\main.py'],
+    ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[('C:\\Users\\Elliot CHEN\\Documents\\GitHub\\WonderhoyPlayer\\main_win.py', '.'), ('C:\\Users\\Elliot CHEN\\Documents\\GitHub\\WonderhoyPlayer\\resources_rc.py', '.')],
+    datas=[('main_win.py', '.'), ('resources_rc.py', '.')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
@@ -34,5 +34,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['C:\\Users\\Elliot CHEN\\Documents\\GitHub\\WonderhoyPlayer\\wonderhoy.ico'],
+    icon=['wonderhoy.ico'],
 )
